@@ -17,12 +17,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     GUI/clientdialog.cpp \
+    GUI/mediamanagementwidget.cpp \
     Logic/main.cpp \
     GUI/mainwindow.cpp
 
 HEADERS += \
     GUI/clientdialog.h \
-    GUI/mainwindow.h
+    GUI/mainwindow.h \
+    GUI/mediamanagementwidget.h
 
 FORMS += \
     mainwindow.ui

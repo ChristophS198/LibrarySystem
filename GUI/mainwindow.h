@@ -6,7 +6,9 @@
 #include <QPushButton>
 #include <QStackedWidget>
 
+
 #include "clientdialog.h"
+#include "mediamanagementwidget.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -24,7 +26,7 @@ public:
 private:
     QStackedWidget* m_centralStackWidget;
     QWidget* m_centralWidget;
-    QWidget* m_centralManagementWidget;
+    MediaManagementWidget* m_centralManagementWidget;
     QWidget *m_groupBoxTop;
     QGroupBox *m_groupBoxMediaManager;
     QGroupBox *m_groupBoxUserManager;

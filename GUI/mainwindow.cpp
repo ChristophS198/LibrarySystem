@@ -1,9 +1,12 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGridLayout>
 #include <QMessageBox>
+#include <QMenu>
+#include <QStatusBar>
+#include <QMenuBar>
+
+#include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -35,7 +38,7 @@ void MainWindow::createTopWidget()
 {
     // Set layout in central Widget
     m_centralWidget = new QWidget(this);
-    m_centralManagementWidget = new QWidget(this);
+    m_centralManagementWidget = new MediaManagementWidget(this);
     QVBoxLayout *centralWidgetLayout = new QVBoxLayout;
     m_centralWidget->setLayout(centralWidgetLayout);
     m_centralStackWidget = new QStackedWidget(this);
