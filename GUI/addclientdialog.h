@@ -7,17 +7,13 @@
 
 
 
-class ClientDialog : public QDialog
+class AddClientDialog : public QDialog
 {
 Q_OBJECT
 public:
-    explicit ClientDialog(QWidget* parent = nullptr);
+    explicit AddClientDialog(QWidget* parent = nullptr);
 
 private:
-    QPushButton* m_button0;
-    QLabel* m_label1;
-    QLabel* m_label2;
-    QVBoxLayout* m_layout;
 
 };
 

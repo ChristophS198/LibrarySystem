@@ -7,7 +7,7 @@
 #include <QStackedWidget>
 
 
-#include "clientdialog.h"
+#include "addclientdialog.h"
 #include "mediamanagementwidget.h"
 
 
@@ -32,14 +32,14 @@ private:
     QGroupBox *m_groupBoxUserManager;
     QGroupBox *m_groupBoxLoanManager;
 
-    QPushButton* m_AddClientButton;
-    ClientDialog* m_client_dialog;
+    AddClientDialog* m_client_dialog;
 
     void createActions();
     void createStatusBar();
     void createTopWidget();
     void createMediaManager();
     void createUserManager();
+    void connectSignals();
     void about();
 };
 #endif // MAINWINDOW_H

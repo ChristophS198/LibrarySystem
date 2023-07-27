@@ -11,7 +11,7 @@ public:
     explicit MediaManagementWidget(QWidget *parent = nullptr);
 
 signals:
-
+    void goBackToMainView();
 };
 
 #endif // MEDIAMANAGEMENTWIDGET_H

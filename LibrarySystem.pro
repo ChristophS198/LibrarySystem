@@ -16,13 +16,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    GUI/clientdialog.cpp \
+    GUI/addclientdialog.cpp \
     GUI/mediamanagementwidget.cpp \
     Logic/main.cpp \
     GUI/mainwindow.cpp
 
 HEADERS += \
-    GUI/clientdialog.h \
+    GUI/addclientdialog.h \
     GUI/mainwindow.h \
     GUI/mediamanagementwidget.h
 

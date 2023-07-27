@@ -13,15 +13,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     createTopWidget();
     createMediaManager();
+    m_client_dialog = new AddClientDialog(this); // should this be created when needed?
     createUserManager();
 
     createActions();
     createStatusBar();
 
-    m_client_dialog = new ClientDialog(this); // should this be created when needed?
 
-    connect(m_AddClientButton, &QPushButton::clicked, m_client_dialog, &ClientDialog::exec);
     this->resize(800, 500);
+
+    connectSignals();
 }
 
 MainWindow::~MainWindow()
@@ -73,10 +74,12 @@ void MainWindow::createMediaManager()
     layoutMediaManager->addWidget(mediaLabel);
 
     QPushButton *openMediaManagementButton = new QPushButton("Open Media Management");
+    openMediaManagementButton->setToolTip("Switch to Media Management View");
+    openMediaManagementButton->setStatusTip("Switch to Media Management View");
     layoutMediaManager->addWidget(openMediaManagementButton);
 
-    QPixmap logoPixmap(":/Icons/book.svg"); // set your logo here
-    auto bookLabel = new QLabel(m_groupBoxUserManager);
+    QPixmap logoPixmap(":/Icons/book.svg");
+    auto *bookLabel = new QLabel(m_groupBoxUserManager);
     bookLabel->setPixmap(logoPixmap);
     bookLabel->setScaledContents(true);
     bookLabel->setFixedSize(64, 64); // set your size here
@@ -84,28 +87,45 @@ void MainWindow::createMediaManager()
 
     m_groupBoxMediaManager->setLayout(layoutMediaManager);
 
-    connect(openMediaManagementButton, &QPushButton::clicked, this, [&](){m_centralStackWidget->setCurrentIndex(1);});
+    connect(openMediaManagementButton, &QPushButton::clicked, this, [this](){m_centralStackWidget->setCurrentIndex(1);});
 }
 
 void MainWindow::createUserManager()
 {
-    QHBoxLayout *layoutUserManager = new QHBoxLayout;
     QLabel *userLabel = new QLabel(tr("Manage Clients"), m_groupBoxUserManager);
-    layoutUserManager->addWidget(userLabel);
 
-    m_AddClientButton = new QPushButton("Add Client");
-    layoutUserManager->addWidget(m_AddClientButton);
+    // Add buttons for adding and deleting clients
+    auto *addClientButton = new QPushButton("Add Client", m_groupBoxUserManager);
+    addClientButton->setToolTip("Open Dialog for adding new clients");
+    addClientButton->setStatusTip("Open Dialog for adding new clients");
+    auto *removeClientButton = new QPushButton("Remove Client", m_groupBoxUserManager);
+    removeClientButton->setToolTip("Open Dialog for deleting exsiting clients");
+    removeClientButton->setStatusTip("Open Dialog for deleting exsiting clients");
 
-    QPixmap logoPixmap(":/Icons/person-circle2.svg"); // set your logo here
-    auto personLabel = new QLabel(m_groupBoxUserManager);
+    QPixmap logoPixmap(":/Icons/person-circle2.svg");
+    auto *personLabel = new QLabel(m_groupBoxUserManager);
     personLabel->setPixmap(logoPixmap);
     personLabel->setScaledContents(true);
     personLabel->setFixedSize(64, 64); // set your size here
+
+    // populate layout
+    QVBoxLayout *layoutUserOps = new QVBoxLayout;
+    layoutUserOps->addWidget(addClientButton);
+    layoutUserOps->addWidget(removeClientButton);
+    QHBoxLayout *layoutUserManager = new QHBoxLayout;
+    layoutUserManager->addWidget(userLabel);
+    layoutUserManager->addLayout(layoutUserOps);
     layoutUserManager->addWidget(personLabel);
 
 
     m_groupBoxUserManager->setLayout(layoutUserManager);
+    connect(addClientButton, &QPushButton::clicked, m_client_dialog, &AddClientDialog::exec);
 
+}
+
+void MainWindow::connectSignals()
+{
+    connect(m_centralManagementWidget, &MediaManagementWidget::goBackToMainView, this, [&](){m_centralStackWidget->setCurrentIndex(0);});
 }
 
 void MainWindow::createActions()
@@ -120,9 +140,9 @@ void MainWindow::createActions()
 
     // View Menu
     QMenu *viewMenu = menuBar()->addMenu(tr("&View"));
-    QAction *switchToMediaManagementViewAction = viewMenu->addAction(tr("&MediaManagement"), this, [&](){m_centralStackWidget->setCurrentIndex(1);});
+    QAction *switchToMediaManagementViewAction = viewMenu->addAction(tr("&MediaManagement"), this, [this](){m_centralStackWidget->setCurrentIndex(1);});
     switchToMediaManagementViewAction->setStatusTip(tr("Change to MediaManagement View"));
-    QAction *switchToMainViewAction = viewMenu->addAction(tr("&MainView"), this, [&](){m_centralStackWidget->setCurrentIndex(0);});
+    QAction *switchToMainViewAction = viewMenu->addAction(tr("&MainView"), this, [this](){m_centralStackWidget->setCurrentIndex(0);});
     switchToMainViewAction->setStatusTip(tr("Change to Main View"));
 
     // Help Menu
