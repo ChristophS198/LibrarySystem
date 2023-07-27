@@ -1,7 +1,7 @@
 #include <QPushButton>
 #include <QCommonStyle>
 
-#include "mediamanagementwidget.h"
+#include "GUI/mediamanagementwidget.h"
 
 MediaManagementWidget::MediaManagementWidget(QWidget *parent) : QWidget(parent)
 {

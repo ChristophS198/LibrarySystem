@@ -5,7 +5,7 @@
 #include <QComboBox>
 #include <QDateTimeEdit>
 
-#include "addclientdialog.h"
+#include "GUI/addclientdialog.h"
 
 
 AddClientDialog::AddClientDialog(QWidget *parent) : QDialog(parent)

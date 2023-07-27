@@ -6,7 +6,7 @@
 #include <QStatusBar>
 #include <QMenuBar>
 
-#include "mainwindow.h"
+#include "GUI/mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

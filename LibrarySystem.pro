@@ -15,19 +15,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+INCLUDEPATH += $$PWD/include/
+message(qmake INCLUDEPATH = $$INCLUDEPATH)
 SOURCES += \
-    GUI/addclientdialog.cpp \
-    GUI/mediamanagementwidget.cpp \
-    Logic/main.cpp \
-    GUI/mainwindow.cpp
+    src/GUI/addclientdialog.cpp \
+    src/GUI/mediamanagementwidget.cpp \
+    src/Logic/main.cpp \
+    src/GUI/mainwindow.cpp
 
 HEADERS += \
-    GUI/addclientdialog.h \
-    GUI/mainwindow.h \
-    GUI/mediamanagementwidget.h
-
-FORMS += \
-    mainwindow.ui
+    include/GUI/addclientdialog.h \
+    include/GUI/mainwindow.h \
+    include/GUI/mediamanagementwidget.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -35,4 +34,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    GUI/ressources.qrc
+    src/GUI/ressources.qrc
