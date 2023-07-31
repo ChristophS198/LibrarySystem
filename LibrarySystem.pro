@@ -35,3 +35,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     src/GUI/ressources.qrc
+
+# generate doxygen documentation
+win32 {
+    BUILD_TIME = $$system("time /T") # no spaces between 'system' command and args.
+} else {
+    BUILD_TIME = $$system("time")
+    $$system("doxygen doc/Doxyfile")
+}
+message($$BUILD_TIME) # output the current time
